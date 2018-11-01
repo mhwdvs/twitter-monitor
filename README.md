@@ -18,6 +18,8 @@ To Be Added:
  - Add option to monitor multiple twitter users with the same set of keywords
  
  - Make keywords definable in command line rather than having to edit the source
+ 
+ - GUI?
 
 Feel free to leave more feature suggestions as issues :)
 
