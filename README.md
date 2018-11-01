@@ -14,6 +14,10 @@ To Be Added:
  - Filter for "@" only within the first character of a tweet
  
  - Currently just sends the tweet to a discord webhook, but would like to automate an action within the script, such as automatically opening the link in a new browser window and even automating that's actions if you are expecting what site you will be visiting
+ 
+ - Add option to monitor multiple twitter users with the same set of keywords
+ 
+ - Make keywords definable in command line rather than having to edit the source
 
 Feel free to leave more feature suggestions as issues :)
 
