@@ -9,10 +9,12 @@ while yn = 0
   print("Handles Submitted: " + handles)
   print("Is this correct? Press *y* to continue or *n* to try again!")
   type(usrsubmit)
+  #checks are untested
   if usrsubmit = "y"
     yn = 1
   else yn = 0
 
+  #this subprocess is untested
 i = 0
   while i < len(handles):
   subprocess.call(["python main.py", "-" + "handles[i]"])
