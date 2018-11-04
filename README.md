@@ -1,7 +1,7 @@
 # tweeper-the-twitter-monitor
 Monitors Twitter for new tweets with filter capabilities, lightning-fast using Tweepy's Stream API
 
-**How to get up and going:**
+**Get Started:**
 
  - Sign up for a twitter developer account and create a new app. You will need twitter developer keys in order for this script to function.
  - Replace all caps twitter key sections with their respective keys. Please do not remove any of the quotes surrounding them, that will break the script :)
