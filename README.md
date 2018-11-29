@@ -30,6 +30,8 @@ To Be Added:
 
  - Custom filters from command line
 
+ - Get twitter keys from external text file
+
 Feel free to leave more feature suggestions as issues :)
 
 **If you are a business owner and don't have a clue on how to proficciently operate this monitor;** I am willing to host it on a server and maintain it for a monthly fee, please DM me on twitter if you're interested!
