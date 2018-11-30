@@ -40,10 +40,12 @@ def run(chosenhandle, url):
         def on_status(self, status):
             print(status.text)
             ifvoid = 0
-            if((str(status.text).find("RT")) != -1):
+            #finds "RT" in first 2 characters of a tweet (retweet)
+            if((str(status.text[:2]).find("RT")) != -1):
                 print("I think this is a retweet, we'll ignore this!")
                 ifvoid = 1
 
+            #finds "https://" anywhere in the tweet"
             elif((str(status.text).find("https://")) != -1 and ifvoid == 0):
                 print("This tweet is an image or link!")
 
@@ -54,8 +56,8 @@ def run(chosenhandle, url):
 
                 embed.post()
 
-            elif((str(status.text).find("@")) == 0 and ifvoid == 0):
-                #this is bad, i should only look for @ in the first character
+            #finds "@" in the first character of a tweet (reply)
+            elif((str(status.text[:1]).find("@")) == 0 and ifvoid == 0):
                 print("This is likely a reply or other tweet, we will send this to discord but without an @")
                 print("Tell the shitty dev of this program to comment out this functionallity if you want tweets in different channels")
 
@@ -63,6 +65,8 @@ def run(chosenhandle, url):
                 embed.set_desc("New non-link/image reply from " + handle + ":")
                 embed.add_field(name="Tweet Contents", value=str(status.text))
                 embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
+
+                embed.post()
 
 
     myStreamListener = MyStreamListener()
