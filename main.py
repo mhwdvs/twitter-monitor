@@ -38,6 +38,7 @@ def run(chosenhandle, url):
     class MyStreamListener(tweepy.StreamListener):
 
         def on_status(self, status):
+            print("New tweet from monitored handle:")
             print(status.text)
             ifvoid = 0
             #finds "RT" in first 2 characters of a tweet (retweet)
@@ -58,16 +59,24 @@ def run(chosenhandle, url):
 
             #finds "@" in the first character of a tweet (reply)
             elif((str(status.text[:1]).find("@")) == 0 and ifvoid == 0):
-                print("This is likely a reply or other tweet, we will send this to discord but without an @")
-                print("Tell the shitty dev of this program to comment out this functionallity if you want tweets in different channels")
+                print("This is likely a reply or other tweet, will not send")
+
+                #embed = Webhook(url)
+                #embed.set_desc("New non-link/image reply from " + handle + ":")
+                #embed.add_field(name="Tweet Contents", value=str(status.text))
+                #embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
+
+                #embed.post()
+
+            else:
+                print("This is a regualr tweet, will send!")
 
                 embed = Webhook(url)
-                embed.set_desc("New non-link/image reply from " + handle + ":")
+                embed.set_desc("New tweet from " + handle + ":")
                 embed.add_field(name="Tweet Contents", value=str(status.text))
                 embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
 
                 embed.post()
-
 
     myStreamListener = MyStreamListener()
     myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
