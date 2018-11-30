@@ -9,8 +9,29 @@ def run(chosenhandle, url):
     print("Number of Arguments: " + str(len(sys.argv)) + " arguments")
     print("Argument List: " + str(sys.argv))
 
-    auth = tweepy.OAuthHandler("API KEY HERE", "API SECRET HERE")
-    auth.set_access_token("ACCESS TOKEN HERE", "ACCESS TOKEN SECRET HERE")
+    #import keys from file
+    with open ("devkeys.txt", "rt") as getkeys: # open file lorem.txt for reading text data
+        keys = getkeys.read()         # read the entire file into a string variable
+    
+    #use to see the contents of the key file
+    #print("Your Twitter API Developer Keys are:")
+    #print(keys)  		          # print contents
+
+    keylist = keys.splitlines()
+
+    #use to test that the line split is working correctly
+    #print(keylist[0])
+
+    #this is redundant but verbose, consider removing
+    apikey = keylist[0]
+    apisecret = keylist[1]
+    accesskey = keylist[2]
+    accesssecret = keylist[3]
+
+    auth = tweepy.OAuthHandler(apikey, apisecret)
+    auth.set_access_token(accesskey, accesssecret)
+
+    print(str(auth))
 
     api = tweepy.API(auth)
 
@@ -19,10 +40,12 @@ def run(chosenhandle, url):
         def on_status(self, status):
             print(status.text)
             ifvoid = 0
-            if((str(status.text).find("RT")) != -1):
+            #finds "RT" in first 2 characters of a tweet (retweet)
+            if((str(status.text[:2]).find("RT")) != -1):
                 print("I think this is a retweet, we'll ignore this!")
                 ifvoid = 1
 
+            #finds "https://" anywhere in the tweet"
             elif((str(status.text).find("https://")) != -1 and ifvoid == 0):
                 print("This tweet is an image or link!")
 
@@ -33,8 +56,8 @@ def run(chosenhandle, url):
 
                 embed.post()
 
-            elif((str(status.text).find("@")) == 0 and ifvoid == 0):
-                #this is bad, i should only look for @ in the first character
+            #finds "@" in the first character of a tweet (reply)
+            elif((str(status.text[:1]).find("@")) == 0 and ifvoid == 0):
                 print("This is likely a reply or other tweet, we will send this to discord but without an @")
                 print("Tell the shitty dev of this program to comment out this functionallity if you want tweets in different channels")
 
@@ -42,6 +65,8 @@ def run(chosenhandle, url):
                 embed.set_desc("New non-link/image reply from " + handle + ":")
                 embed.add_field(name="Tweet Contents", value=str(status.text))
                 embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
+
+                embed.post()
 
 
     myStreamListener = MyStreamListener()
