@@ -9,8 +9,29 @@ def run(chosenhandle, url):
     print("Number of Arguments: " + str(len(sys.argv)) + " arguments")
     print("Argument List: " + str(sys.argv))
 
-    auth = tweepy.OAuthHandler("API KEY HERE", "API SECRET HERE")
-    auth.set_access_token("ACCESS TOKEN HERE", "ACCESS TOKEN SECRET HERE")
+    #import keys from file
+    with open ("devkeys.txt", "rt") as getkeys: # open file lorem.txt for reading text data
+        keys = getkeys.read()         # read the entire file into a string variable
+    
+    #use to see the contents of the key file
+    #print("Your Twitter API Developer Keys are:")
+    #print(keys)  		          # print contents
+
+    keylist = keys.splitlines()
+
+    #use to test that the line split is working correctly
+    #print(keylist[0])
+
+    #this is redundant but verbose, consider removing
+    apikey = keylist[0]
+    apisecret = keylist[1]
+    accesskey = keylist[2]
+    accesssecret = keylist[3]
+
+    auth = tweepy.OAuthHandler(apikey, apisecret)
+    auth.set_access_token(accesskey, accesssecret)
+
+    print(str(auth))
 
     api = tweepy.API(auth)
 
