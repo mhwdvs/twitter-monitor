@@ -1,6 +1,7 @@
 # tweeper-the-twitter-monitor
 Monitors Twitter for new tweets with filter capabilities, lightning-fast using Tweepy's Stream API
  - Multithreaded (can monitor multiple handles without having to run the script multiple times!)
+ - Built-in URL expander! (sent after initial tweet, expands typical t.co link into more funcitonal format)
 
 **Get Started:**
 
@@ -9,20 +10,13 @@ Monitors Twitter for new tweets with filter capabilities, lightning-fast using T
  - Run start.exe
 
 To Be Added:
- - URL expander so if the tweets you are monitoring are time-sensitive you can bypass the t.co redirection, that sometimes adds a few seconds of delay.
     
  - Currently just sends the tweet to a discord webhook, but would like to automate an action within the script, such as automatically opening the link in a new browser window and even automating that's actions if you are expecting what site you will be visiting
- 
  - Make keywords definable in command line rather than having to edit the source
- 
  - GUI?
-
  - Add logging
-
  - Ability to send logs to a seperate discord channel in real time (could be beneficial for example if you needed to know as soon as possible if there was an issue with the monitor)
-
  - Ability to select filters from command line
-
  - Different filters for different monitors
 
 Feel free to leave more feature suggestions as issues :)

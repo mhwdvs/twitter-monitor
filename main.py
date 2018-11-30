@@ -2,9 +2,15 @@ import sys
 import tweepy
 import requests
 import discord_hooks
+import re
 from discord_hooks import Webhook
+from unshortenit import UnshortenIt
+
 
 def run(chosenhandle, url):
+
+    #frontloading basic tasks to improve efficiency
+    urlexpander = UnshortenIt()
 
     print("Number of Arguments: " + str(len(sys.argv)) + " arguments")
     print("Argument List: " + str(sys.argv))
@@ -43,13 +49,14 @@ def run(chosenhandle, url):
             ifvoid = 0
             #finds "RT" in first 2 characters of a tweet (retweet)
             if((str(status.text[:2]).find("RT")) != -1):
-                print("I think this is a retweet, we'll ignore this!")
+                print("This is a retweet or someone abusing the negative filter, we'll ignore this!")
                 ifvoid = 1
 
             #finds "https://" anywhere in the tweet"
             elif((str(status.text).find("https://")) != -1 and ifvoid == 0):
                 print("This tweet is an image or link!")
 
+                #sends tweet contents to discord
                 embed = Webhook(url)
                 embed.set_desc("@everyone - NEW LINK/IMAGE FROM " + handle + ":")
                 embed.add_field(name="Tweet Contents", value=str(status.text))
@@ -57,16 +64,30 @@ def run(chosenhandle, url):
 
                 embed.post()
 
+                print("Tweet Sent to Discord!")
+
+                #finds and sends expanded url to discord
+                foundurls = re.findall(r'(https?://\S+)', str(status.text))
+                urlnumber = len(foundurls)
+                print("Number of URLs in tweet: " + urlnumber)
+                currenturl = 1
+                while currenturl <= urlnumber:
+                    uri = urlexpander.unshorten(foundurls[currenturl - 1])
+                    
+                    embed = Webhook(url)
+                    embed.set_desc("Expanded URL:")
+                    embed.add_field(name="-->", value=uri)
+                    embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
+
+                    embed.post()
+
+                    currenturl = currenturl + 1
+
+                    print("Expanded URL " + uri + " Sent To Discord!")
+
             #finds "@" in the first character of a tweet (reply)
             elif((str(status.text[:1]).find("@")) == 0 and ifvoid == 0):
                 print("This is likely a reply or other tweet, will not send")
-
-                #embed = Webhook(url)
-                #embed.set_desc("New non-link/image reply from " + handle + ":")
-                #embed.add_field(name="Tweet Contents", value=str(status.text))
-                #embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
-
-                #embed.post()
 
             else:
                 print("This is a regualr tweet, will send!")
