@@ -49,11 +49,7 @@ def run(chosenhandle, url):
             ifvoid = 0
             #finds "RT" in first 2 characters of a tweet (retweet)
             if((str(status.text[:2]).find("RT")) != -1):
-<<<<<<< HEAD
-                print("I think this is a retweet, we'll ignore this!")
-=======
                 print("This is a retweet or someone abusing the negative filter, we'll ignore this!")
->>>>>>> development
                 ifvoid = 1
 
             #finds "https://" anywhere in the tweet"
@@ -68,12 +64,6 @@ def run(chosenhandle, url):
 
                 embed.post()
 
-<<<<<<< HEAD
-            #finds "@" in the first character of a tweet (reply)
-            elif((str(status.text[:1]).find("@")) == 0 and ifvoid == 0):
-                print("This is likely a reply or other tweet, we will send this to discord but without an @")
-                print("Tell the shitty dev of this program to comment out this functionallity if you want tweets in different channels")
-=======
                 print("Tweet Sent to Discord!")
 
                 #finds and sends expanded url to discord
@@ -101,7 +91,6 @@ def run(chosenhandle, url):
 
             else:
                 print("This is a regualr tweet, will send!")
->>>>>>> development
 
                 embed = Webhook(url)
                 embed.set_desc("New tweet from " + handle + ":")
@@ -109,10 +98,6 @@ def run(chosenhandle, url):
                 embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
 
                 embed.post()
-<<<<<<< HEAD
-
-=======
->>>>>>> development
 
     myStreamListener = MyStreamListener()
     myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
