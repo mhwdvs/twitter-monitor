@@ -25,7 +25,7 @@ To Be Added:
 
 Feel free to leave more feature suggestions as issues :)
 
-**Build**
+**Build:**
 See [Wiki](https://github.com/izedout/twitter-monitor/wiki/Build)
 
 *I am not responsible if this is in any way abusing the Twitter API and resulting in you getting your developer account closed.* In its current state it does not collect data or abuse get requests, and the stream API is supported by them because it it less resource intensive, so I think they should be cool with it :) 
