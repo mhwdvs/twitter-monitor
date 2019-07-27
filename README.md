@@ -20,6 +20,7 @@ To Be Added:
  - Different filters for different monitors
  - Simultaneous API and non-API implementations (to get tweet the fastest, operate while twitter dev keys arent available, but still have access to private accounts, etc etc
  - Monitor keywords across all of twitter (simple terms, hashtags)
+ - Remote operation via webapp
 
 Feel free to leave more feature suggestions as issues :)
 
