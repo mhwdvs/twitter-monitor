@@ -11,10 +11,12 @@ Monitors Twitter for new tweets with filter capabilities, lightning-fast using T
 
 To Be Added:
  - Keywords (I dont see a use case but is very easy to implement)
+     - Keyword file to store keywords in
+ - File-stored twitter handles
  - GUI (not really necessary but cool project)
  - Logging
      - Documenting all tweets in a database format such as JSON for use in AI training projects (super not Twitter approved but we have workarounds)
-     - Options to record additional information such as time, twitter handle, twitter name, bio
+     - Options to record additional information such as time, twitter handle, twitter name, bio, # of likes, retweets and comments
  - Send logs to a seperate discord channel in real time (could be beneficial for example if you needed to know as soon as possible if there was an issue with the monitor)
  - Select filters from command line
  - Different filters for different monitors
