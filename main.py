@@ -69,15 +69,15 @@ def run(chosenhandle, url):
                 #finds and sends expanded url to discord
                 foundurls = re.findall(r'(https?://\S+)', str(status.text))
                 urlnumber = len(foundurls)
-                print("Number of URLs in tweet: " + urlnumber)
+                print("Number of URLs in tweet: " + str(urlnumber))
                 currenturl = 1
                 while currenturl <= urlnumber:
                     uri = urlexpander.unshorten(foundurls[currenturl - 1])
                     
                     embed = Webhook(url)
                     embed.set_desc("Expanded URL:")
-                    embed.add_field(name="-->", value=uri)
-                    embed.set_footer(text="Twitter Monitor by @__ized on twitter",ts=True)
+                    embed.add_field(name="", value=uri)
+                    embed.set_footer(text="Twitter Monitor -- github.com/izedout/twitter-monitor/",ts=True)
 
                     embed.post()
 
